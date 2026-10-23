@@ -91,10 +91,10 @@ export async function openProfileMenu(windowId: string) {
       },
       {
         id: `window:${id}`,
-        title: `Open ${s.profiles[id]!.name} in New Window`,
+        title: s.profiles[id]!.name,
         alternate: true,
+        symbol: "arrow.up.right.square",
         ...(i < 9 ? { key: String(i + 1), modifiers: ["control" as const, "command" as const] } : { modifiers: ["command" as const] }),
-        swatch: profileAccent(s.profiles[id]),
       },
     ]),
     { separator: true },
