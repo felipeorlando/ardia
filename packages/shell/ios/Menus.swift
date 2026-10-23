@@ -702,10 +702,8 @@ enum MainMenu {
       item.tracksChecked = false
       item.state = p.current ? .on : .off
       profiles.addItem(item)
-      let newWindow = CommandItem(p.title, "newWindow", arg: p.id, key: i < 9 ? "\(i + 1)" : "", [.control, .command]).alternate()
+      let newWindow = CommandItem("\(p.title) ↗", "newWindow", arg: p.id, key: i < 9 ? "\(i + 1)" : "", [.control, .command]).alternate()
       newWindow.tracksChecked = false
-      newWindow.image = NSImage(systemSymbolName: "arrow.up.right.square", accessibilityDescription: "Open in New Window")
-      if #available(macOS 27.0, *) { newWindow.preferredImageVisibility = .visible }
       profiles.addItem(newWindow)
     }
     profiles.addItem(.separator())

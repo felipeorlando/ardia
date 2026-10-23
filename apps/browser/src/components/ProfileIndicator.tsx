@@ -91,9 +91,9 @@ export async function openProfileMenu(windowId: string) {
       },
       {
         id: `window:${id}`,
-        title: s.profiles[id]!.name,
+        title: `${s.profiles[id]!.name} ↗`,
         alternate: true,
-        symbol: "arrow.up.right.square",
+        swatch: profileAccent(s.profiles[id]),
         ...(i < 9 ? { key: String(i + 1), modifiers: ["control" as const, "command" as const] } : { modifiers: ["command" as const] }),
       },
     ]),
