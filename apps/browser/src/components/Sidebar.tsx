@@ -351,7 +351,8 @@ function PageRows({ windowId, profileId, current, rows, lazy, offScreen, tiles, 
   const limit = cap ?? (growing ? mountedRows : undefined);
   const list = limit === undefined ? all : all.slice(0, limit);
   const pending = useBrowser((s) => (growing ? entriesHeight(s, windowId, profileId, all.slice(mountedRows)) : 0));
-  const divided = !offScreen && all.length > 0;
+  const showClearButton = useSettings((s) => s.showClearButton);
+  const divided = showClearButton && !offScreen && all.length > 0;
   const pinnedSection = pinnedRows.length + pinnedGroups.length > 0;
   const newTabsAtTop = useSettings((s) => s.newTabPosition === "top");
   const animated = current && !offScreen;

@@ -162,7 +162,7 @@ const ROWS: Record<SettingsPane, Section[]> = {
       rows: {
         showClearButton: {
           title: "Show Clear button",
-          description: "The ↓ Clear button between your pins and your tabs. ⇧⌘K and the menus still clear unpinned tabs.",
+          description: "The ↓ Clear button and its line between your pins and your tabs. ⇧⌘K and the menus still clear unpinned tabs.",
           keywords: ["clear", "close all", "clear unpinned", "today", "divider"],
         },
       },
