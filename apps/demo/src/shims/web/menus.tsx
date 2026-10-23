@@ -45,6 +45,7 @@ function MenuList({ items, x, y }: { items: MenuItem[]; x: number; y: number }) 
     <div className={`ardia-menu${dark ? " dark" : ""}`} style={{ left, top: Math.min(y, window.innerHeight - 40), width }} onPointerDown={(e) => e.stopPropagation()}>
       {items.map((item, i) => {
         if ("separator" in item) return <div key={i} className="ardia-menu-separator" />;
+        if (item.alternate) return null;
         const enabled = item.enabled !== false;
         return (
           <div

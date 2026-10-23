@@ -18,6 +18,7 @@ const MODES: { value: Settings["appearance"]; title: string; description: string
 export function AppearancePane() {
   const appearance = useBrowser((s) => s.settings.appearance);
   const showClearButton = useBrowser((s) => s.settings.showClearButton);
+  const showProfileDots = useBrowser((s) => s.settings.showProfileDots);
   const choose = (mode: Settings["appearance"]) => {
     useBrowser.getState().updateSettings({ appearance: mode });
     void setAppearance(mode);
@@ -35,6 +36,9 @@ export function AppearancePane() {
       <Group>
         <Row anchor="appearance.showClearButton">
           <Toggle value={showClearButton} onChange={(v) => useBrowser.getState().updateSettings({ showClearButton: v })} />
+        </Row>
+        <Row anchor="appearance.profileDots">
+          <Toggle value={showProfileDots} onChange={(v) => useBrowser.getState().updateSettings({ showProfileDots: v })} />
         </Row>
       </Group>
       <AppIconPicker />

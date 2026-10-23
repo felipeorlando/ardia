@@ -252,8 +252,9 @@ public class ShellModule: Module {
         }
         WindowManager.shared.emit = { name, body in self?.sendEvent(name, body) }
         FocusHandoff.shared.install()
-        if let queue = self?.appContext?.reactBridge?.uiManager.methodQueue {
-          FocusHandoff.shared.afterPendingUI = { block in queue.async { DispatchQueue.main.async(execute: block) } }
+        FocusHandoff.shared.afterPendingUI = { block in
+          guard let queue = self?.appContext?.reactBridge?.uiManager?.methodQueue else { return DispatchQueue.main.async(execute: block) }
+          queue.async { DispatchQueue.main.async(execute: block) }
         }
         LeftEdgeWatcher.shared.emit = { name, body in self?.sendEvent(name, body) }
         WindowManager.shared.runtime = self.map(ObjectIdentifier.init)
@@ -596,6 +597,7 @@ public class ShellModule: Module {
         entry.target = target
         entry.representedObject = item["id"]
       }
+      entry.isAlternate = item["alternate"] as? Bool == true
       entry.isEnabled = item["enabled"] as? Bool ?? true
       entry.state = item["checked"] as? Bool == true ? .on : .off
       if let symbol = item["symbol"] as? String {
