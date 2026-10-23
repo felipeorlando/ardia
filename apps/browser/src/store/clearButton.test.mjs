@@ -18,3 +18,11 @@ test("the Clear button setting is on by default, and clearing unpinned tabs work
   assert.equal(organize.unpinnedTabIds(S(), w).length, 0);
   assert.equal(S().settings.showClearButton, false);
 });
+
+test("the sidebar draws the Clear divider only with the setting on, on screen, and with tabs", async () => {
+  const { clearDividerShown } = await import("../components/sidebar/clearDividerShown.ts");
+  assert.equal(clearDividerShown(true, false, 3), true);
+  assert.equal(clearDividerShown(false, false, 3), false);
+  assert.equal(clearDividerShown(true, true, 3), false);
+  assert.equal(clearDividerShown(true, false, 0), false);
+});
