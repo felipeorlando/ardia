@@ -13,15 +13,19 @@ const publish = (next: OpenMenu | null) => {
 };
 
 const pointer = { x: 0, y: 0 };
-if (typeof window !== "undefined")
+let commandHeld = false;
+if (typeof window !== "undefined") {
   window.addEventListener(
     "pointerdown",
     (e) => {
       pointer.x = e.clientX;
       pointer.y = e.clientY;
+      commandHeld = e.metaKey;
     },
     true,
   );
+  for (const type of ["keydown", "keyup"] as const) window.addEventListener(type, (e) => (commandHeld = e.metaKey), true);
+}
 
 export function showMenu(items: MenuItem[]): Promise<string | null> {
   open?.resolve(null);
@@ -38,7 +42,7 @@ const KEYS: Record<string, string> = { command: "⌘", shift: "⇧", option: "�
 
 function MenuList({ items, x, y }: { items: MenuItem[]; x: number; y: number }) {
   const [sub, setSub] = useState<{ index: number; top: number } | null>(null);
-  const [command, setCommand] = useState(false);
+  const [command, setCommand] = useState(commandHeld);
   const dark = useBrowser((s) => s.ui.appDark);
   useEffect(() => {
     const track = (e: KeyboardEvent | PointerEvent) => setCommand(e.metaKey);
