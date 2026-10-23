@@ -38,13 +38,24 @@ const KEYS: Record<string, string> = { command: "⌘", shift: "⇧", option: "�
 
 function MenuList({ items, x, y }: { items: MenuItem[]; x: number; y: number }) {
   const [sub, setSub] = useState<{ index: number; top: number } | null>(null);
+  const [command, setCommand] = useState(false);
   const dark = useBrowser((s) => s.ui.appDark);
+  useEffect(() => {
+    const track = (e: KeyboardEvent | PointerEvent) => setCommand(e.metaKey);
+    const events = ["keydown", "keyup", "pointermove"] as const;
+    for (const type of events) document.addEventListener(type, track);
+    return () => {
+      for (const type of events) document.removeEventListener(type, track);
+    };
+  }, []);
   const width = 240;
   const left = Math.min(x, window.innerWidth - width - 8);
   return (
     <div className={`ardia-menu${dark ? " dark" : ""}`} style={{ left, top: Math.min(y, window.innerHeight - 40), width }} onPointerDown={(e) => e.stopPropagation()}>
       {items.map((item, i) => {
         if ("separator" in item) return <div key={i} className="ardia-menu-separator" />;
+        const next = items[i + 1];
+        if (item.alternate ? !command : command && next && "id" in next && next.alternate) return null;
         const enabled = item.enabled !== false;
         return (
           <div

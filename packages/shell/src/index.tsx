@@ -157,6 +157,7 @@ export type MenuItem =
       modifiers?: ("command" | "shift" | "option" | "control")[];
       enabled?: boolean;
       checked?: boolean;
+      alternate?: boolean;
       children?: MenuItem[];
       share?: boolean;
     };
