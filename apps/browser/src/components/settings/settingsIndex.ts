@@ -160,16 +160,6 @@ const ROWS: Record<SettingsPane, Section[]> = {
     {
       section: "Sidebar",
       rows: {
-        showClearButton: {
-          title: "Show Clear button",
-          description: "The ↓ Clear button between your pins and your tabs. ⇧⌘K and the menus still clear unpinned tabs.",
-          keywords: ["clear", "close all", "clear unpinned", "today", "divider"],
-        },
-      },
-    },
-    {
-      section: "Sidebar",
-      rows: {
         profileDots: {
           title: "Show profile dots",
           description: "The dots at the bottom of the sidebar that switch profiles. Swiping and ⌃1–⌃9 still work.",

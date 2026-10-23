@@ -59,7 +59,6 @@ export type Settings = {
   appearance: "auto" | "light" | "dark";
   addressBar: "toolbar" | "sidebar";
   showProfileDots: boolean;
-  showClearButton: boolean;
 
   defaultProfileId: string;
 
@@ -113,7 +112,6 @@ export const DEFAULT_SETTINGS: Settings = {
   appearance: "auto",
   addressBar: "toolbar",
   showProfileDots: true,
-  showClearButton: true,
   defaultProfileId: DEFAULT_PROFILE_ID,
   shortcuts: {},
   openLinksInLittleArdia: true,
